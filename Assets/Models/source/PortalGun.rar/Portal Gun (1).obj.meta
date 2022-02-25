@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 1b257814e72957d48a7a383dbb45dfa1
+ModelImporter:
+  serializedVersion: 20200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Arm_1Mat
+    second: {fileID: 2100000, guid: a6d1d931f49b81146a6964e16a820011, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Battery_HousingMat
+    second: {fileID: 2100000, guid: bbdc413ca89f8454f861c76f9a8c0bad, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CableMat
+    second: {fileID: 2100000, guid: 251f59c359e7fd040aa20352a1566e47, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Control_Lamp_BlueMat
+    second: {fileID: 2100000, guid: 89ba1e3e9f852fc49b923dda8756a8c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Control_Lamp_OrangeMat
+    second: {fileID: 2100000, guid: f10c8a47d4d0edd4ca127965dfff9d27, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Energy_transfer_channelMat
+    second: {fileID: 2100000, guid: 01bc2518da348a640b617a0a3a84424d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Event_Horizon_EmitterMat
+    second: {fileID: 2100000, guid: c7ab42570e84a844c832fcb3dc10d891, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Event_Horizon_Estimation_WheelMat
+    second: {fileID: 2100000, guid: 77933687298452b4faf9e10493e54c77, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: GripMat
+    second: {fileID: 2100000, guid: fb544af16d13fbb41a78bf195559337d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Holding_Device_1Mat
+    second: {fileID: 2100000, guid: 27f3d08abc9573749ba71eab457c3477, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LampMat
+    second: {fileID: 2100000, guid: 9e27c9f74bf01574aa04249f0438a497, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LightMat
+    second: {fileID: 2100000, guid: efa7002cd17fb054398e623c81673e2b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pneumatic_1Mat
+    second: {fileID: 2100000, guid: c395df22aa977ec4c80624eecbb71d1e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Portal_Controll_LampMat
+    second: {fileID: 2100000, guid: 8fa5d5e3cc85355498859fd578b8d2f0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Portal_Controll_Lamp_SocketMat
+    second: {fileID: 2100000, guid: 18dc345b6e3f73740866375f24123c0e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Portal_EmitterMat
+    second: {fileID: 2100000, guid: 1b5fa844118636042921ad696d2435bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Portal_Emitter_WhiteMat
+    second: {fileID: 2100000, guid: 4357be8e694ad1047976635f44301d39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Power_transfer_deviceMat
+    second: {fileID: 2100000, guid: e1a3bc698e83fa444967470db5f9063b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Radiation_protection_Mat
+    second: {fileID: 2100000, guid: a6d1129809c0cb046a3e9819d35837d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Symmetrie_Arm_11_Arm_2Mat
+    second: {fileID: 2100000, guid: f3e33ecbf27e7f347b985375599b0e46, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Symmetrie_Arm_11_Holding_Device_2Mat
+    second: {fileID: 2100000, guid: 810ab181d49ae934d84007f25894d9a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Symmetrie_Arm_11_Lamp1Mat
+    second: {fileID: 2100000, guid: 47218667568d8454fb83a533137aa6c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Symmetrie_Arm_11_Light1Mat
+    second: {fileID: 2100000, guid: da5d3a847c699984782b5a9e1e59e4b6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Symmetrie_Arm_11_pNEUMATIC_Pneumatic_2Mat
+    second: {fileID: 2100000, guid: 0e31c2ebc4a37894bb84cb781b526dac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ventilation_GridMat
+    second: {fileID: 2100000, guid: a629c39f3fb4fc04381925d871306874, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: White_Shell_1Mat
+    second: {fileID: 2100000, guid: 03ff1694526808d47aec1084aff5ed17, type: 2}
+  materials:
+    materialImportMode: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 0.01
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 1
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 1
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 0.01
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
