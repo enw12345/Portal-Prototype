@@ -19,7 +19,7 @@ namespace CharacterBehaviour
         [SerializeField] [Range(1,5)] private float lookSpeed = 2f;
         [SerializeField] [Range(1, 100)] private float sensitivity = 100f;
 
-        private float _yRotation = 0f;
+        private float _yRotation;
         
         // Start is called before the first frame update
         private void Start()
@@ -51,7 +51,7 @@ namespace CharacterBehaviour
         }
         private void Look()
         {
-            var mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
+            var mouseX = Input.GetAxis("Mouse X") * sensitivity * lookSpeed * Time.deltaTime;
 
             _yRotation += mouseX;
             transform.localRotation = Quaternion.Euler(0, _yRotation, 0);

@@ -7,7 +7,7 @@ namespace CameraBehaviour
         //Rotation
         [SerializeField] [Range(1,5)] private float lookSpeed = 2f;
         [SerializeField] [Range(1, 100)] private float sensitivity = 100f;
-        private float _xRotation = 0f;
+        private float _xRotation;
 
         private void Update()
         {
@@ -16,7 +16,7 @@ namespace CameraBehaviour
 
         private void Look()
         {
-            var mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+            var mouseY = Input.GetAxis("Mouse Y") * sensitivity * lookSpeed * Time.deltaTime;
             
             _xRotation -= mouseY;
             _xRotation = Mathf.Clamp(_xRotation, -90f, 90f);
