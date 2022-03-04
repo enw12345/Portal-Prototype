@@ -297,6 +297,27 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &963991849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373077932396204296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1766a3c9f7b54d6c9318a2a1092eca49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _portalSpawner: {fileID: 7338438438007019953}
+  _bluePortalProjectile: {fileID: 275082941341669380, guid: b8f6d8abf70629046b433bec3a0c5dea, type: 3}
+  _orangePortalProjectile: {fileID: 7644767592568914506, guid: d1146743f8994394da64e2b7f09dafa1, type: 3}
+  _bluePortal: {fileID: -7667737056510553834, guid: 443fc96063ba10d4c98730c3a5d5bd4f, type: 3}
+  _orangePortal: {fileID: -1405347795119141409, guid: 2dd9992a86357bf419f79786f24edacd, type: 3}
+  _projectileSpeed: 20
+  _portalSurface:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &6102607623366274137
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,7 +371,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1b257814e72957d48a7a383dbb45dfa1, type: 3}
       propertyPath: m_Name
-      value: Portal Gun (1)
+      value: Portal Gun
       objectReference: {fileID: 0}
     - target: {fileID: 2206318054085919550, guid: 1b257814e72957d48a7a383dbb45dfa1, type: 3}
       propertyPath: m_LocalScale.x
@@ -362,6 +383,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b257814e72957d48a7a383dbb45dfa1, type: 3}
+--- !u!1 &6373077932396204296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1b257814e72957d48a7a383dbb45dfa1, type: 3}
+  m_PrefabInstance: {fileID: 6102607623366274137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5997220415958354866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1b257814e72957d48a7a383dbb45dfa1, type: 3}
