@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PortalGun
+namespace PortalScripts
 {
     public class PortalGunBehaviour : MonoBehaviour
     {
@@ -20,11 +20,16 @@ namespace PortalGun
 
         private void Awake()
         {
+            _bluePortal = Instantiate(_bluePortal, Vector3.zero, Quaternion.identity);
+            _orangePortal = Instantiate(_orangePortal, Vector3.zero, Quaternion.identity);
+            _bluePortal.Init(_orangePortal, _orangePortal.inPosition);
+            _orangePortal.Init(_bluePortal, _bluePortal.inPosition);
+            
             _currentBluePortalProjectile = Instantiate(_bluePortalProjectile, Vector3.zero, Quaternion.identity);
             _currentOrangePortalProjectile = Instantiate(_orangePortalProjectile, Vector3.zero, Quaternion.identity);
-
-            _currentBluePortalProjectile.Init(Instantiate(_bluePortal, Vector3.zero, Quaternion.identity), this);
-            _currentOrangePortalProjectile.Init(Instantiate(_orangePortal, Vector3.zero, Quaternion.identity), this);
+            _currentBluePortalProjectile.Init(_bluePortal, this);
+            _currentOrangePortalProjectile.Init(_orangePortal, this);
+            
         }
 
         private void Update()
@@ -71,6 +76,7 @@ namespace PortalGun
                 var pos = hit.point + hit.normal * 0.1f;
                 portalToSpawn.transform.SetPositionAndRotation(pos,
                     Quaternion.FromToRotation(Vector3.forward, -hit.normal));
+                portalToSpawn.SetForwardDirection(hit.normal);
             }
         }
     }

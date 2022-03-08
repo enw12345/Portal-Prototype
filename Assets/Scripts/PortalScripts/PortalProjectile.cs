@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 
-namespace PortalGun
+namespace PortalScripts
 {
     public class PortalProjectile : MonoBehaviour
     {
         public bool portalSpawned;
         private PortalGunBehaviour _portalGun;
+        
         public Portal Portal { get; private set; }
 
         private void OnTriggerEnter(Collider other)
@@ -13,7 +14,6 @@ namespace PortalGun
             if (!other.CompareTag("Portal Surface")) return;
             SpawnPortal();
         }
-
         public void Init(Portal portalObject, PortalGunBehaviour portalGun)
         {
             Portal = portalObject;
@@ -22,7 +22,6 @@ namespace PortalGun
             gameObject.SetActive(false);
             portalSpawned = false;
         }
-
         private void SpawnPortal()
         {
             Portal.gameObject.SetActive(true);

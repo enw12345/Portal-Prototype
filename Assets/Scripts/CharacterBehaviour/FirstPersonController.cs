@@ -7,7 +7,6 @@ namespace CharacterBehaviour
         public LayerMask groundLayer;
 
         //Movement
-        [SerializeField] private CharacterController controller;
         [SerializeField] [Range(1, 25)] private float moveSpeed = 12f;
 
         [SerializeField] [Range(1, 5)] private float lookSpeed = 2f;
@@ -17,12 +16,13 @@ namespace CharacterBehaviour
         private Transform _transform;
 
         private float _yRotation;
-
+        private Rigidbody _rb;
         private Vector3 velocity;
 
         // Start is called before the first frame update
         private void Start()
         {
+            _rb = GetComponent<Rigidbody>();
             _transform = GetComponent<Transform>();
             _collider = GetComponent<CapsuleCollider>();
             Cursor.lockState = CursorLockMode.Locked;
@@ -31,12 +31,13 @@ namespace CharacterBehaviour
         // Update is called once per frame
         private void Update()
         {
-            Move();
+            // Move();
             Look();
         }
 
         private void FixedUpdate()
         {
+            Move();
         }
 
         private void Move()
@@ -44,8 +45,11 @@ namespace CharacterBehaviour
             var x = Input.GetAxis("Horizontal");
             var z = Input.GetAxis("Vertical");
 
-            var move = _transform.right * x + _transform.forward * z;
-            controller.Move(move * moveSpeed * Time.deltaTime);
+            // var move = new Vector3(x , 0,  z);
+            
+            var move = transform.right * x + transform.forward * z;
+            var desiredVelocity = move * moveSpeed;
+            _rb.velocity = desiredVelocity;
         }
 
         private void Look()

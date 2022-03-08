@@ -109,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37eca375e7a4d89bf24074205218ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 50
+  portalSpawned: 0
 --- !u!54 &7908766867522486260
 Rigidbody:
   m_ObjectHideFlags: 0
