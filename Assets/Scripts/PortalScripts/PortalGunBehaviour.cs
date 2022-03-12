@@ -27,40 +27,33 @@ namespace PortalScripts
             
             _currentBluePortalProjectile = Instantiate(_bluePortalProjectile, Vector3.zero, Quaternion.identity);
             _currentOrangePortalProjectile = Instantiate(_orangePortalProjectile, Vector3.zero, Quaternion.identity);
-            _currentBluePortalProjectile.Init(_bluePortal, this);
-            _currentOrangePortalProjectile.Init(_orangePortal, this);
-            
+            _currentBluePortalProjectile.Init(_bluePortal);
+            _currentOrangePortalProjectile.Init(_orangePortal);
         }
 
         private void Update()
         {
             if (Input.GetMouseButtonDown(0))
             {
-                var bluePortal = _currentBluePortalProjectile.Portal;
-                bluePortal.gameObject.SetActive(false);
-                GetPortalSpawnLocation(bluePortal);
-                
+                GetPortalSpawnLocation(_currentBluePortalProjectile);
                 _currentBluePortalProjectile.portalSpawned = false;
                 _currentBluePortalProjectile.transform.SetPositionAndRotation(_portalSpawner.position,
                     _portalSpawner.rotation);
+                
                 _currentBluePortalProjectile.gameObject.SetActive(true);
                 _currentBluePortalProjectile.GetComponent<Rigidbody>().velocity =
                     _portalSpawner.forward * _projectileSpeed;
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                var orangePortal = _currentOrangePortalProjectile.Portal;
-                orangePortal.gameObject.SetActive(false);
-                GetPortalSpawnLocation(orangePortal);
-                
-                _currentOrangePortalProjectile.portalSpawned = false;
-                _currentOrangePortalProjectile.transform.SetPositionAndRotation(_portalSpawner.position,
-                    _portalSpawner.rotation);
-                _currentOrangePortalProjectile.gameObject.SetActive(true);
-                _currentOrangePortalProjectile.GetComponent<Rigidbody>().velocity =
-                    _portalSpawner.forward * _projectileSpeed;
-            }
+            if (!Input.GetMouseButtonDown(1)) return;
+            GetPortalSpawnLocation(_currentOrangePortalProjectile);
+            _currentOrangePortalProjectile.portalSpawned = false;
+            _currentOrangePortalProjectile.transform.SetPositionAndRotation(_portalSpawner.position,
+                _portalSpawner.rotation);
+            
+            _currentOrangePortalProjectile.gameObject.SetActive(true);
+            _currentOrangePortalProjectile.GetComponent<Rigidbody>().velocity =
+                _portalSpawner.forward * _projectileSpeed;
         }
 
         private void OnDrawGizmos()
@@ -68,16 +61,11 @@ namespace PortalScripts
             Debug.DrawRay(_portalSpawner.position, _portalSpawner.transform.forward);
         }
 
-        private void GetPortalSpawnLocation(Portal portalToSpawn)
+        private void GetPortalSpawnLocation(PortalProjectile projectile)
         {
-            if (Physics.Raycast(_portalSpawner.position, _portalSpawner.transform.forward, out var hit,
-                    Mathf.Infinity, _portalSurface))
-            {
-                var pos = hit.point + hit.normal * 0.1f;
-                portalToSpawn.transform.SetPositionAndRotation(pos,
-                    Quaternion.FromToRotation(Vector3.forward, -hit.normal));
-                portalToSpawn.SetForwardDirection(hit.normal);
-            }
+            Physics.Raycast(_portalSpawner.position, _portalSpawner.transform.forward, out var hit,
+                Mathf.Infinity, _portalSurface);
+            projectile.PortalHit = hit;
         }
     }
 }

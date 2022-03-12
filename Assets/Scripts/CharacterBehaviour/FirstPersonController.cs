@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 namespace CharacterBehaviour
@@ -5,7 +7,6 @@ namespace CharacterBehaviour
     public class FirstPersonController : MonoBehaviour
     {
         public LayerMask groundLayer;
-
         //Movement
         [SerializeField] [Range(1, 25)] private float moveSpeed = 12f;
 
@@ -13,31 +14,33 @@ namespace CharacterBehaviour
         [SerializeField] [Range(1, 100)] private float sensitivity = 100f;
 
         private CapsuleCollider _collider;
-        private Transform _transform;
 
         private float _yRotation;
         private Rigidbody _rb;
-        private Vector3 velocity;
 
+        public float playerGravity = 5f;
+        
         // Start is called before the first frame update
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
-            _transform = GetComponent<Transform>();
             _collider = GetComponent<CapsuleCollider>();
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            // Move();
-            Look();
-        }
-
         private void FixedUpdate()
         {
+            Look();
             Move();
+            Gravity();
+        }
+
+        private void Gravity()
+        {
+            if (!IsGrounded())
+            {
+                _rb.AddForce(Physics.gravity * playerGravity);
+            }
         }
 
         private void Move()
@@ -45,8 +48,6 @@ namespace CharacterBehaviour
             var x = Input.GetAxis("Horizontal");
             var z = Input.GetAxis("Vertical");
 
-            // var move = new Vector3(x , 0,  z);
-            
             var move = transform.right * x + transform.forward * z;
             var desiredVelocity = move * moveSpeed;
             _rb.velocity = desiredVelocity;
@@ -59,6 +60,7 @@ namespace CharacterBehaviour
             _yRotation += mouseX;
             transform.localRotation = Quaternion.Euler(0, _yRotation, 0);
         }
+        
 
         private bool IsGrounded()
         {

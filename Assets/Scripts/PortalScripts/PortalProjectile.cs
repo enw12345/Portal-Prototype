@@ -5,25 +5,30 @@ namespace PortalScripts
     public class PortalProjectile : MonoBehaviour
     {
         public bool portalSpawned;
-        private PortalGunBehaviour _portalGun;
-        
-        public Portal Portal { get; private set; }
+        private Portal Portal { get; set; }
+        public RaycastHit PortalHit { get; set; }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (!other.CompareTag("Portal Surface")) return;
+            if (!other.CompareTag("Portal Surface") && !portalSpawned) return;
             SpawnPortal();
+            
+            gameObject.SetActive(false);
         }
-        public void Init(Portal portalObject, PortalGunBehaviour portalGun)
+        public void Init(Portal portalObject)
         {
             Portal = portalObject;
             Portal.gameObject.SetActive(false);
-            _portalGun = portalGun;
             gameObject.SetActive(false);
-            portalSpawned = false;
         }
+        
         private void SpawnPortal()
         {
+            var pos = PortalHit.point + PortalHit.normal * 0.1f;
+            Portal.transform.SetPositionAndRotation(pos,
+                Quaternion.FromToRotation(Vector3.forward, -PortalHit.normal));
+            Portal.SetForwardDirection(PortalHit.normal);
+            
             Portal.gameObject.SetActive(true);
             portalSpawned = true;
         }

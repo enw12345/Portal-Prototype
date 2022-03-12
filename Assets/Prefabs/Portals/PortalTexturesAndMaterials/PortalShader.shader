@@ -49,8 +49,7 @@ Shader "Custom/PortalShader"
             float x = distance(uv.x, _PortalCenter);
             float y = distance(uv.y, _PortalCenter);
             
-            // return step(_PortalSize, pow(x,2) / pow(_PortalRadiusA, 2) + pow(y,2) / pow(_PortalRadiusB, 2));
-             return step(pow(x,2) / pow(_PortalRadiusA, 2) + pow(y,2) / pow(_PortalRadiusB, 2), _PortalSize);
+            return step(pow(x,2) / pow(_PortalRadiusA, 2) + pow(y,2) / pow(_PortalRadiusB, 2), _PortalSize);
         }
         
         
@@ -60,6 +59,8 @@ Shader "Custom/PortalShader"
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex,  IN.uv_MainTex * oval) * _Color;
             o.Albedo = c.rgb;
+            float toClip = oval == 1 ? 1 : -1;
+            clip(toClip);
             // Metallic and smoothness come from slider variables
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;

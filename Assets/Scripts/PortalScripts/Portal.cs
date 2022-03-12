@@ -1,3 +1,4 @@
+using CharacterBehaviour;
 using UnityEngine;
 
 namespace PortalScripts
@@ -15,6 +16,10 @@ namespace PortalScripts
             var objectRigidbody = other.GetComponent<Rigidbody>();
             var objectVelocityMag = objectRigidbody.velocity.magnitude;
 
+            other.TryGetComponent(out FirstPersonController controller);
+
+            // if (controller)
+            
             TeleportObject(other.transform);
             objectRigidbody.velocity = other.transform.forward * objectVelocityMag;
         }
@@ -32,9 +37,7 @@ namespace PortalScripts
         
         private void TeleportObject(Transform objectTransform)
         {
-            objectTransform.rotation= Quaternion.FromToRotation(Vector3.forward, _outPortal.forwardDirection);
-
-            objectTransform.position = _outPosition.position;
+            objectTransform.SetPositionAndRotation(_outPosition.position, Quaternion.FromToRotation(Vector3.forward, _outPortal.forwardDirection));
         }
     }
 }

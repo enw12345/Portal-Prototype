@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 8340565193951556576}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3646113173426421523}
   m_Father: {fileID: 8340565195820484460}
@@ -87,7 +87,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 100
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inPosition: {fileID: 3646113173426421523}
   _outPosition: {fileID: 0}
+  forwardDirection: {x: 0, y: 0, z: 0}
 --- !u!65 &2166414546273968117
 BoxCollider:
   m_ObjectHideFlags: 0
