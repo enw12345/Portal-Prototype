@@ -18,6 +18,7 @@ namespace PortalScripts
         public void Init(Portal portalObject)
         {
             Portal = portalObject;
+            Portal.PortalIsActive = false;
             Portal.gameObject.SetActive(false);
             gameObject.SetActive(false);
         }
@@ -31,6 +32,7 @@ namespace PortalScripts
             
             Portal.gameObject.SetActive(true);
             portalSpawned = true;
+            Portal.PortalIsActive = true;
         }
     }
 }

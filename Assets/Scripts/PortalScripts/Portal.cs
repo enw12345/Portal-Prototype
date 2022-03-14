@@ -8,17 +8,17 @@ namespace PortalScripts
         public Transform inPosition;
         [SerializeField] private Transform _outPosition;
         public Vector3 forwardDirection = Vector3.zero;
-        private Portal _outPortal = null;
+        private Portal _outPortal;
+        public bool PortalIsActive;
         
         private void OnTriggerStay(Collider other)
         {
+            if(!_outPortal.PortalIsActive) return;
             print("Teleporting: " + other.name);
             var objectRigidbody = other.GetComponent<Rigidbody>();
             var objectVelocityMag = objectRigidbody.velocity.magnitude;
 
             other.TryGetComponent(out FirstPersonController controller);
-
-            // if (controller)
             
             TeleportObject(other.transform);
             objectRigidbody.velocity = other.transform.forward * objectVelocityMag;

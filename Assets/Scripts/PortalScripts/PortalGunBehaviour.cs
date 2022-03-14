@@ -55,12 +55,7 @@ namespace PortalScripts
             _currentOrangePortalProjectile.GetComponent<Rigidbody>().velocity =
                 _portalSpawner.forward * _projectileSpeed;
         }
-
-        private void OnDrawGizmos()
-        {
-            Debug.DrawRay(_portalSpawner.position, _portalSpawner.transform.forward);
-        }
-
+        
         private void GetPortalSpawnLocation(PortalProjectile projectile)
         {
             Physics.Raycast(_portalSpawner.position, _portalSpawner.transform.forward, out var hit,
