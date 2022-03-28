@@ -1,25 +1,23 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using InteractableObjects;
+using UnityEngine;
 
 namespace InteractBehaviour
 {
     public abstract class InteractBehaviour : MonoBehaviour
     {
-        [Range(0.85f,1f)] [SerializeField] private float _interactAccuracy;
         private static IEnumerable<InteractableObject> _interactableObjectsList;
+        protected static bool interacting;
+        [Range(0.85f, 1f)] [SerializeField] private float _interactAccuracy;
 
         protected InteractableObject InteractingObject;
-        protected static bool interacting;
-        
+
         private void Awake()
         {
             _interactableObjectsList = FindObjectsOfType<InteractableObject>();
             interacting = false;
         }
-        
-        protected abstract void Interact();
-        
+
         private void Update()
         {
             if (!Input.GetKeyDown(KeyCode.E)) return;
@@ -28,13 +26,14 @@ namespace InteractBehaviour
             {
                 if (!CheckInteraction()) return;
                 Interact();
-                interacting = true;
             }
-            else if(interacting)
+            else if (interacting)
             {
                 Interact();
             }
         }
+
+        protected abstract void Interact();
 
 
         private bool CheckInteraction()
@@ -42,13 +41,12 @@ namespace InteractBehaviour
             var isValid = false;
 
             foreach (var interactable in _interactableObjectsList)
-            {
-                if (Vector3.Dot(transform.forward,  (interactable.transform.position - transform.position).normalized) >= _interactAccuracy)
+                if (Vector3.Dot(transform.forward, (interactable.transform.position - transform.position).normalized) >=
+                    _interactAccuracy)
                 {
                     InteractingObject = interactable;
                     isValid = true;
                 }
-            }
 
             return isValid;
         }

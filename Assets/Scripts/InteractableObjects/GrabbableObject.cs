@@ -4,19 +4,9 @@ namespace InteractableObjects
 {
     public class GrabbableObject : InteractableObject
     {
-        private bool _grabbed;
         public Transform grabPosition;
         private float _angularSpeed;
-        
-        public override void Interact()
-        {
-            if(!_grabbed)
-                Grab();
-            else
-            {
-                Drop();
-            }
-        }
+        private bool _grabbed;
 
         private void Update()
         {
@@ -24,7 +14,15 @@ namespace InteractableObjects
 
             transform.position = grabPosition.position;
         }
-        
+
+        public override void Interact()
+        {
+            if (!_grabbed)
+                Grab();
+            else
+                Drop();
+        }
+
 
         private void Drop()
         {
@@ -34,9 +32,8 @@ namespace InteractableObjects
 
         private void Grab()
         {
-            _grabbed = true; 
+            _grabbed = true;
             GetComponent<Rigidbody>().useGravity = false;
         }
-
     }
 }

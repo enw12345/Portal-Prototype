@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 
 namespace CharacterBehaviour
@@ -7,19 +5,20 @@ namespace CharacterBehaviour
     public class FirstPersonController : MonoBehaviour
     {
         public LayerMask groundLayer;
+
         //Movement
         [SerializeField] [Range(1, 25)] private float moveSpeed = 12f;
-
         [SerializeField] [Range(1, 5)] private float lookSpeed = 2f;
-        [SerializeField] [Range(1, 100)] private float sensitivity = 100f;
-
-        private CapsuleCollider _collider;
-
-        private float _yRotation;
-        private Rigidbody _rb;
 
         public float playerGravity = 5f;
-        
+
+        public bool isTeleporting;
+
+        private CapsuleCollider _collider;
+        private Rigidbody _rb;
+
+        private float _yRotation;
+
         // Start is called before the first frame update
         private void Start()
         {
@@ -37,10 +36,7 @@ namespace CharacterBehaviour
 
         private void Gravity()
         {
-            if (!IsGrounded())
-            {
-                _rb.AddForce(Physics.gravity * playerGravity);
-            }
+            if (!IsGrounded()) _rb.AddForce(Physics.gravity * playerGravity);
         }
 
         private void Move()
@@ -55,12 +51,14 @@ namespace CharacterBehaviour
 
         private void Look()
         {
-            var mouseX = Input.GetAxis("Mouse X") * sensitivity * lookSpeed * Time.deltaTime;
+            var mouseX = Input.GetAxis("Mouse X") * lookSpeed;
 
             _yRotation += mouseX;
-            transform.localRotation = Quaternion.Euler(0, _yRotation, 0);
+
+            var desiredRotation = Quaternion.Euler(0, _yRotation, 0);
+            _rb.rotation = desiredRotation;
         }
-        
+
 
         private bool IsGrounded()
         {

@@ -17,6 +17,7 @@
             else
             {
                 InteractingObject.Interact();
+                interacting = true;
             }
         }
     }

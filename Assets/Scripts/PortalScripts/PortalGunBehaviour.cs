@@ -22,9 +22,10 @@ namespace PortalScripts
         {
             _bluePortal = Instantiate(_bluePortal, Vector3.zero, Quaternion.identity);
             _orangePortal = Instantiate(_orangePortal, Vector3.zero, Quaternion.identity);
+            
             _bluePortal.Init(_orangePortal, _orangePortal.inPosition);
             _orangePortal.Init(_bluePortal, _bluePortal.inPosition);
-            
+
             _currentBluePortalProjectile = Instantiate(_bluePortalProjectile, Vector3.zero, Quaternion.identity);
             _currentOrangePortalProjectile = Instantiate(_orangePortalProjectile, Vector3.zero, Quaternion.identity);
             _currentBluePortalProjectile.Init(_bluePortal);
@@ -36,24 +37,21 @@ namespace PortalScripts
             if (Input.GetMouseButtonDown(0))
             {
                 GetPortalSpawnLocation(_currentBluePortalProjectile);
-                _currentBluePortalProjectile.portalSpawned = false;
-                _currentBluePortalProjectile.transform.SetPositionAndRotation(_portalSpawner.position,
-                    _portalSpawner.rotation);
-                
-                _currentBluePortalProjectile.gameObject.SetActive(true);
-                _currentBluePortalProjectile.GetComponent<Rigidbody>().velocity =
-                    _portalSpawner.forward * _projectileSpeed;
+                ShootProjectile(_currentBluePortalProjectile);
             }
 
             if (!Input.GetMouseButtonDown(1)) return;
             GetPortalSpawnLocation(_currentOrangePortalProjectile);
-            _currentOrangePortalProjectile.portalSpawned = false;
-            _currentOrangePortalProjectile.transform.SetPositionAndRotation(_portalSpawner.position,
-                _portalSpawner.rotation);
+            ShootProjectile(_currentOrangePortalProjectile);
+        }
+
+        private void ShootProjectile(PortalProjectile projectile)
+        {
+            projectile.portalSpawned = false;
+            projectile.transform.SetPositionAndRotation(_portalSpawner.position, _portalSpawner.rotation);
             
-            _currentOrangePortalProjectile.gameObject.SetActive(true);
-            _currentOrangePortalProjectile.GetComponent<Rigidbody>().velocity =
-                _portalSpawner.forward * _projectileSpeed;
+            projectile.gameObject.SetActive(true);
+            projectile.GetComponent<Rigidbody>().velocity = _portalSpawner.forward * _projectileSpeed;
         }
         
         private void GetPortalSpawnLocation(PortalProjectile projectile)

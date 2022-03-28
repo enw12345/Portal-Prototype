@@ -8,7 +8,6 @@ namespace InteractableObjects
 
         public virtual void CancelInteraction()
         {
-            return;
         }
     }
 }
