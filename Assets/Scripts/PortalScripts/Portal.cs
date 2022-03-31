@@ -1,3 +1,4 @@
+using CameraBehaviour;
 using CharacterBehaviour;
 using UnityEngine;
 
@@ -20,40 +21,59 @@ namespace PortalScripts
             _playerCamera = Camera.main;
         }
 
-        private void Update()
-        {
-            UpdateCamera();
-        }
+        // private void Update()
+        // {
+        //     UpdateCamera();
+        // }
 
-        private void OnTriggerExit(Collider other)
-        {
-            other.GetComponent<Collider>().enabled = true;
-
-            other.TryGetComponent(out FirstPersonController controller);
-            if (controller)
-                controller.enabled = true;
-        }
-
-        private void OnTriggerStay(Collider other)
+        // private void OnTriggerExit(Collider other)
+        // {
+        //     other.GetComponent<Collider>().enabled = true;
+        //
+        //     other.TryGetComponent(out FirstPersonController controller);
+        //     if (controller)
+        //         controller.enabled = true;
+        // }
+        //
+        // private void OnTriggerStay(Collider other)
+        // {
+        //     if (!_outPortal.PortalIsActive) return;
+        //     var objectRigidbody = other.GetComponent<Rigidbody>();
+        //     var objectVelocityMag = objectRigidbody.velocity.magnitude;
+        //     
+        //     // if (Vector3.Distance(other.bounds.center, transform.position) < 0.1f)
+        //     TeleportObject(other.transform);
+        //
+        //     other.transform.forward = _outPortal.transform.forward;
+        //     objectRigidbody.velocity = other.transform.forward * objectVelocityMag;
+        //     other.GetComponent<Collider>().enabled = false;
+        // }
+        
+        private void OnTriggerEnter(Collider other)
         {
             if (!_outPortal.PortalIsActive) return;
             var objectRigidbody = other.GetComponent<Rigidbody>();
             var objectVelocityMag = objectRigidbody.velocity.magnitude;
-
-            TeleportObject(other.transform);
-
-            other.transform.forward = _outPortal.transform.forward;
-            objectRigidbody.velocity = other.transform.forward * objectVelocityMag;
+            
             other.GetComponent<Collider>().enabled = false;
+            // if (!(Vector3.Distance(other.bounds.center, transform.position) < 0.1f)) return;
+            TeleportObject(other.transform);
+            other.transform.forward = -_outPortal.transform.forward;
+            objectRigidbody.velocity = other.transform.forward * objectVelocityMag;
+            objectRigidbody.rotation = Quaternion.FromToRotation(Vector3.forward, -_outPortal.forwardDirection);
+
+            other.TryGetComponent(out FirstPersonController controller);
+            if (!controller) return;
+            var newRotationEuler = other.transform.rotation.eulerAngles;
+            controller.ResetRotation(newRotationEuler.y);
         }
 
         private void UpdateCamera()
         {
-            _portalCamera.fieldOfView = 60;
+            _portalCamera.fieldOfView = 120;
             var relativeRotation = transform.InverseTransformDirection(_playerCamera.transform.forward);
             relativeRotation = Vector3.Scale(relativeRotation, new Vector3(-1, 1, -1));
             _outPortalCamera.transform.forward = _outPortal.transform.TransformDirection(relativeRotation);
-
 
             // var relativePosition = transform.InverseTransformPoint(_playerCamera.transform.position);
             // relativePosition = Vector3.Scale(relativePosition, new Vector3(-1, 1, -1));
@@ -81,10 +101,8 @@ namespace PortalScripts
         private void TeleportObject(Transform objectTransform)
         {
             objectTransform.SetPositionAndRotation(_outPosition.position,
-                Quaternion.FromToRotation(Vector3.forward, _outPortal.forwardDirection));
-
-            objectTransform.TryGetComponent(out FirstPersonController controller);
-            if (controller) controller.enabled = false;
+                Quaternion.FromToRotation(Vector3.forward, -_outPortal.forwardDirection));
+            objectTransform.GetComponent<Collider>().enabled = true;
         }
     }
 }

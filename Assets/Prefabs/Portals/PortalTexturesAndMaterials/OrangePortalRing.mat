@@ -31,8 +31,8 @@ Material:
     - _PortalRingCenter: 0.5
     - _PortalRingInnerSize: 0.5
     - _PortalRingOuterSize: 0.6
-    - _PortalRingRadiusA: 0.4
-    - _PortalRingRadiusB: 0.6
+    - _PortalRingRadiusA: 0.628
+    - _PortalRingRadiusB: 0.639
     m_Colors:
     - _PortalRingColor: {r: 1, g: 0.41951597, b: 0, a: 1}
   m_BuildTextureStacks: []

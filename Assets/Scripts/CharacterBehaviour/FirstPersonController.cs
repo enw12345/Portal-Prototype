@@ -10,9 +10,12 @@ namespace CharacterBehaviour
         [SerializeField] [Range(1, 25)] private float moveSpeed = 12f;
         [SerializeField] [Range(1, 5)] private float lookSpeed = 2f;
 
-        public float playerGravity = 5f;
 
-        public bool isTeleporting;
+        [SerializeField] private Transform stepRayHigher;
+        [SerializeField] private Transform stepRayLower;
+        [SerializeField] private float stepHeight = 0.11f;
+        [SerializeField] private float stepSmooth = 0.1f;
+        public float playerGravity = 5f;
 
         private CapsuleCollider _collider;
         private Rigidbody _rb;
@@ -24,14 +27,17 @@ namespace CharacterBehaviour
         {
             _rb = GetComponent<Rigidbody>();
             _collider = GetComponent<CapsuleCollider>();
+            stepRayHigher.position = new Vector3(stepRayHigher.position.x, stepHeight, stepRayHigher.position.z);
             Cursor.lockState = CursorLockMode.Locked;
+            Input.ResetInputAxes();
         }
 
         private void FixedUpdate()
         {
-            Look();
+            Turn();
             Move();
             Gravity();
+            StepClimb();
         }
 
         private void Gravity()
@@ -49,9 +55,10 @@ namespace CharacterBehaviour
             _rb.velocity = desiredVelocity;
         }
 
-        private void Look()
+        private void Turn()
         {
             var mouseX = Input.GetAxis("Mouse X") * lookSpeed;
+            if (mouseX == 0) return;
 
             _yRotation += mouseX;
 
@@ -59,15 +66,38 @@ namespace CharacterBehaviour
             _rb.rotation = desiredRotation;
         }
 
-
+        public void ResetRotation(float newY)
+        {
+            _yRotation = newY;
+        }
+        
         private bool IsGrounded()
         {
             var colliderBounds = _collider.bounds;
             var raycastHit = Physics.Raycast(colliderBounds.center, Vector3.down, colliderBounds.extents.y + 0.1f,
                 groundLayer);
-            var rayColor = raycastHit ? Color.green : Color.red;
-            Debug.DrawRay(colliderBounds.center, Vector3.down * (colliderBounds.extents.y + 1), rayColor);
             return raycastHit;
+        }
+
+        private void StepClimb()
+        {
+            Debug.DrawRay(stepRayLower.position, transform.forward, Color.red);
+            Debug.DrawRay(stepRayHigher.position, transform.forward, Color.blue);
+
+            RaycastHit hitLower;
+            if (Physics.Raycast(stepRayLower.position, transform.TransformDirection(Vector3.forward), out hitLower, .1f,
+                    groundLayer))
+            {
+                print("Found Step");
+                RaycastHit hitHigher;
+                if (!Physics.Raycast(stepRayHigher.position, transform.TransformDirection(Vector3.forward),
+                        out hitHigher, 0.2f, groundLayer))
+                {
+                    print("Stepping");
+                    _rb.position -= new Vector3(0, -stepSmooth, 0);
+                    // _rb.position += new Vector3(_rb.position.x, _rb.position.y + stepSmooth, _rb.position.z);
+                }
+            }
         }
     }
 }

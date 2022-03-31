@@ -11,7 +11,8 @@ namespace InteractBehaviour
         [Range(0.85f, 1f)] [SerializeField] private float _interactAccuracy;
 
         protected InteractableObject InteractingObject;
-
+        [SerializeField] private float maxGrabDistance = 3f;
+        
         private void Awake()
         {
             _interactableObjectsList = FindObjectsOfType<InteractableObject>();
@@ -44,8 +45,11 @@ namespace InteractBehaviour
                 if (Vector3.Dot(transform.forward, (interactable.transform.position - transform.position).normalized) >=
                     _interactAccuracy)
                 {
-                    InteractingObject = interactable;
-                    isValid = true;
+                    if (Vector3.Distance(interactable.transform.position, transform.position) < maxGrabDistance)
+                    {
+                        InteractingObject = interactable;
+                        isValid = true;
+                    }
                 }
 
             return isValid;
