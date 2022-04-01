@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using InteractableObjects;
+using Manager;
 using UnityEngine;
 
 namespace InteractBehaviour
@@ -21,6 +22,7 @@ namespace InteractBehaviour
 
         private void Update()
         {
+            if (!GameManager.Instance.GameStart) return;
             if (!Input.GetKeyDown(KeyCode.E)) return;
 
             if (!interacting)

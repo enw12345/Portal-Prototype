@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Manager;
+using UnityEngine;
 
 namespace CameraBehaviour
 {
@@ -11,6 +12,7 @@ namespace CameraBehaviour
 
         private void Update()
         {
+            if (!GameManager.Instance.GameStart) return;
             Look();
         }
 

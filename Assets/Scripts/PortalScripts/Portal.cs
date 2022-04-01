@@ -1,4 +1,3 @@
-using CameraBehaviour;
 using CharacterBehaviour;
 using UnityEngine;
 
@@ -20,34 +19,6 @@ namespace PortalScripts
         {
             _playerCamera = Camera.main;
         }
-
-        // private void Update()
-        // {
-        //     UpdateCamera();
-        // }
-
-        // private void OnTriggerExit(Collider other)
-        // {
-        //     other.GetComponent<Collider>().enabled = true;
-        //
-        //     other.TryGetComponent(out FirstPersonController controller);
-        //     if (controller)
-        //         controller.enabled = true;
-        // }
-        //
-        // private void OnTriggerStay(Collider other)
-        // {
-        //     if (!_outPortal.PortalIsActive) return;
-        //     var objectRigidbody = other.GetComponent<Rigidbody>();
-        //     var objectVelocityMag = objectRigidbody.velocity.magnitude;
-        //     
-        //     // if (Vector3.Distance(other.bounds.center, transform.position) < 0.1f)
-        //     TeleportObject(other.transform);
-        //
-        //     other.transform.forward = _outPortal.transform.forward;
-        //     objectRigidbody.velocity = other.transform.forward * objectVelocityMag;
-        //     other.GetComponent<Collider>().enabled = false;
-        // }
         
         private void OnTriggerEnter(Collider other)
         {
@@ -89,8 +60,6 @@ namespace PortalScripts
             _outPortal = outPortal;
             _outPosition = outPosition;
             _outPortalCamera = _portalCamera;
-
-            print(_portalCamera.pixelWidth + " , " + _portalCamera.pixelHeight);
         }
 
         public void SetForwardDirection(Vector3 newForwardDirection)

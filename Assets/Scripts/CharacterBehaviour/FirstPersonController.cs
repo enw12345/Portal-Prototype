@@ -1,3 +1,4 @@
+using Manager;
 using UnityEngine;
 
 namespace CharacterBehaviour
@@ -16,33 +17,53 @@ namespace CharacterBehaviour
         [SerializeField] private float stepHeight = 0.11f;
         [SerializeField] private float stepSmooth = 0.1f;
         public float playerGravity = 5f;
-
-        private CapsuleCollider _collider;
+        
         private Rigidbody _rb;
 
         private float _yRotation;
 
+        [SerializeField]private bool isGrounded;
+        
         // Start is called before the first frame update
         private void Start()
         {
             _rb = GetComponent<Rigidbody>();
-            _collider = GetComponent<CapsuleCollider>();
             stepRayHigher.position = new Vector3(stepRayHigher.position.x, stepHeight, stepRayHigher.position.z);
             Cursor.lockState = CursorLockMode.Locked;
             Input.ResetInputAxes();
+            groundLayer |= (1 << 6);
         }
 
         private void FixedUpdate()
         {
+            if (!GameManager.Instance.GameStart) return;
             Turn();
             Move();
-            Gravity();
             StepClimb();
+            Gravity();
+            isGrounded = false;
+        }
+
+        private void OnCollisionStay(Collision collision)
+        {
+            var collisionLayer = collision.gameObject.layer;
+                var layerAsLayerMask = (1 << collisionLayer);
+            if ( layerAsLayerMask == groundLayer)
+                isGrounded = true;
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            var collisionLayer = collision.gameObject.layer;
+            var layerAsLayerMask = (1 << collisionLayer);
+            
+            if (layerAsLayerMask == groundLayer)
+                isGrounded = false;
         }
 
         private void Gravity()
         {
-            if (!IsGrounded()) _rb.AddForce(Physics.gravity * playerGravity);
+            if (!isGrounded) _rb.AddForce(Physics.gravity * playerGravity);
         }
 
         private void Move()
@@ -69,14 +90,6 @@ namespace CharacterBehaviour
         public void ResetRotation(float newY)
         {
             _yRotation = newY;
-        }
-        
-        private bool IsGrounded()
-        {
-            var colliderBounds = _collider.bounds;
-            var raycastHit = Physics.Raycast(colliderBounds.center, Vector3.down, colliderBounds.extents.y + 0.1f,
-                groundLayer);
-            return raycastHit;
         }
 
         private void StepClimb()

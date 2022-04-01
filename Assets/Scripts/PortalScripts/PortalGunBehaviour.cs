@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Manager;
+using UnityEngine;
 
 namespace PortalScripts
 {
@@ -34,6 +35,7 @@ namespace PortalScripts
 
         private void Update()
         {
+            if (!GameManager.Instance.GameStart) return;
             if (Input.GetMouseButtonDown(0))
             {
                 GetPortalSpawnLocation(_currentBluePortalProjectile);
@@ -47,7 +49,6 @@ namespace PortalScripts
 
         private void ShootProjectile(PortalProjectile projectile)
         {
-            projectile.portalSpawned = false;
             projectile.transform.SetPositionAndRotation(_portalSpawner.position, _portalSpawner.rotation);
             
             projectile.gameObject.SetActive(true);
